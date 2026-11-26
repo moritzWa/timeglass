@@ -1,0 +1,13 @@
+name: macOS checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - run: sh scripts/test.sh
+      - run: sh scripts/build.sh --release
+      - name: Check bundle creation without signing credentials
+        run: TIMEGLASS_SIGN_IDENTITY=- sh scripts/package.sh build/Timeglass.app

@@ -32,20 +32,37 @@ The countdown uses a saved wall-clock deadline, so hiding the app or sleeping
 does not reset it. A sleeping Mac may show the notification when it wakes;
 Timeglass does not wake the computer. It cannot alert while the Mac is shut down.
 
-## Build and install
+## Download and install
+
+**[Download Timeglass for Apple Silicon](https://github.com/moritzWa/timeglass/releases/download/v0.1.0/Timeglass-0.1.0-macos-arm64.zip)** · [All releases](https://github.com/moritzWa/timeglass/releases)
+
+Requires **macOS 26 or later** and an **Apple Silicon Mac** (M1 or newer).
+
+1. Download and unzip the archive.
+2. Drag **Timeglass.app** into **Applications**, then open it.
+3. Type a duration and press Enter. Allow notifications when macOS asks.
+
+The download is Developer ID signed, notarized by Apple, and includes a stapled
+notarization ticket. No developer tools or account are needed. Checksums are
+provided on the release page. To update, replace the app with a newer download.
+
+## Build from source
 
 Requires Apple Silicon, macOS 26+, and Xcode Command Line Tools.
 The app uses Swift, AppKit's native `NSGlassEffectView`, and UserNotifications.
 No webview, account, network client, package dependency or background server.
 
 ```sh
+git clone https://github.com/moritzWa/timeglass.git
+cd timeglass
 sh scripts/test.sh
 sh scripts/build.sh
 sh scripts/install.sh
 ```
 
 Packaging uses an available Developer ID certificate, or ad-hoc signing if none
-exists. This is a local development build, not a notarized release.
+exists. Source builds are for local development. Official release archives are
+notarized; see [release instructions](docs/RELEASING.md) for signing and verification.
 
 The editable icon is `assets/Timeglass.svg`. Rebuild it with
 `python3 scripts/build-icon.py` (Pillow, ImageMagick and macOS iconutil).
@@ -67,3 +84,7 @@ Model tests cover duration validation, countdown formatting, elapsed deadlines,
 state round-trips and clearing stopped timers. Native checks run in a muted
 macOS VM, never through sound playback on the user's desktop.
 See [test results](docs/TESTING.md).
+
+## License
+
+[MIT](LICENSE). Contributions are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).

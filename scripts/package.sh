@@ -23,5 +23,9 @@ cat > "$app/Contents/Info.plist" <<'PLIST'
 </dict></plist>
 PLIST
 identity=${TIMEGLASS_SIGN_IDENTITY:-$(security find-identity -v -p codesigning 2>/dev/null | awk '/Developer ID Application:/ {print $2; exit}')}
-codesign --force --sign "${identity:--}" "$app"
+if [ "${identity:--}" = "-" ]; then
+    codesign --force --sign - "$app"
+else
+    codesign --force --options runtime --timestamp --sign "$identity" "$app"
+fi
 codesign --verify --strict "$app"
