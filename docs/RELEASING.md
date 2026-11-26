@@ -27,6 +27,7 @@ SHA256SUMS.txt. Existing release output is never overwritten.
 Output is under build/distribution/0.1.0/. The staging notarize.zip and
 notarization.json are not public assets. Publish only Timeglass-0.1.0-macos-arm64.zip
 and SHA256SUMS.txt. The app contains no runtime state, clipboard data or fixtures.
+The MIT license is included in the app's Resources directory.
 
 ## Publish
 
